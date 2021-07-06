@@ -41,3 +41,13 @@ Route::get('/job_chain', function () {
 });
 
 
+Route::get('/job_chain_with_error', function () {
+    App\Jobs\JobTest1::withChain([
+        new App\Jobs\JobTest2("step1"),
+        new App\Jobs\JobWithError("err"),
+        new App\Jobs\JobTest3("step2"),
+    ])->dispatch("start job");
+});
+
+
+
