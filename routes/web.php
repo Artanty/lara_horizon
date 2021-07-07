@@ -40,11 +40,26 @@ Route::get('/job_chain', function () {
     ])->dispatch("start job");
 });
 
+Route::get('/job_chain_with_delay', function () {
+    App\Jobs\JobTest1::withChain([
+        new App\Jobs\JobTest2("step1"),
+        new App\Jobs\JobTest3("step2"),
+    ])->delay(60)->dispatch("start job");
+});
+
 
 Route::get('/job_chain_with_error', function () {
     App\Jobs\JobTest1::withChain([
         new App\Jobs\JobTest2("step1"),
         new App\Jobs\JobWithError("err"),
+        new App\Jobs\JobTest3("step2"),
+    ])->dispatch("start job");
+});
+
+Route::get('/job_chain_with_error_tries_3', function () {
+    App\Jobs\JobTest1::withChain([
+        new App\Jobs\JobTest2("step1"),
+        new App\Jobs\JobWithErrorTries3("err"),
         new App\Jobs\JobTest3("step2"),
     ])->dispatch("start job");
 });

@@ -4,3 +4,8 @@
 guide:
 https://phpqa.ru/post/ocheredi-v-laravel
 https://www.youtube.com/watch?v=DFCH1n3oOnA
+
+
+===
+php artisan serve --port=1821
+php artisan queue:work
